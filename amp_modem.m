@@ -23,10 +23,10 @@ fc=20e3;
 Ac = 1;
 ct=Ac*cos(2*pi*fc*tt);
 
-%message signal
-Am=1;
-fm = 1e3;
-mt = Am*cos(2*pi*fm*tt);
+%message signal 
+Am=-2;
+fm = 2e3;
+mt = Am*sin(2*pi*fm*tt)/(pi * tc);
 
 %max of absolute of m(t)
 maxmt = Am;
