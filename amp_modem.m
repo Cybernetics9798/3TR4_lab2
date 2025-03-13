@@ -26,13 +26,18 @@ ct=Ac*cos(2*pi*fc*tt);
 %message signal 
 Am=-2;
 fm = 2e3;
-mt = Am*sinc(2*pi*fm*tt);
+%mt = Am*sin(2*pi*fm*tt);
+Tm = 5e-4;
+%already modified sinc function interaction
+mt = Am*sinc(2*pi*tt / Tm);
+
 
 %max of absolute of m(t)
 maxmt = Am;
 %For 40% modulation
-ka=0.4/maxmt;
-
+%ka=0.4/maxmt;
+%ka = 0.5 / maxmt;
+ka = 2 / maxmt;
 %AM signal
 st = (1+ka*mt).*ct;
 
@@ -114,9 +119,11 @@ axis ([-25e3 25e3 0 max(abs(Sf))])
 
 %time constant RC
 %This should be optimized to avoid envelope distortion 
-RC = 0.5*(1/fc + 1/fm);
-
-
+%RC = 0.5*(1/fc + 1/fm);
+%RC = 1/fc;
+%RC = 10*Tm;
+%RC = best optimzation;
+RC = 0.5.*(Tm + 1/fc);
 %Envelope detector
 yt = st;
 n=1;
